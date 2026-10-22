@@ -1,0 +1,74 @@
+CONTEXTO:
+Se utiliza Java 21 en la IDE IntelliJ IDEA. Es la Práctica 8 de Modelos de Programación Orientada a Objetos (MPOO), Herencia (2da parte), de la Facultad de Ingeniería, UNAM. El objetivo de la práctica es implementar constructores sobrecargados y constructores de clases derivadas que utilicen los constructores de la clase base. El programa se ejecuta por consola, sin package y utiliza Scanner de java.util para capturar datos por teclado. Mantener el nivel y estilo de las prácticas anteriores, con clases separadas y sin funcionalidades innecesarias.
+
+OBJETIVO:
+Crear la clase base Figura y derivar de ella la clase Circulo. Figura debe almacenar el nombre de la figura y definir el método calcularArea(). Circulo debe agregar el radio, contar con constructores propios y reutilizar los constructores de la clase base mediante super(...). Incluir constructores sobrecargados y usar this(...) para reutilizar la inicialización cuando corresponda. El programa debe solicitar el radio, crear un círculo y mostrar sus datos junto con el área calculada.
+
+CODIGO
+Diagrama de clases:
+
++----------------------------------+
+|              Figura              |
++----------------------------------+
+| - nombre : String                |
++----------------------------------+
+| + Figura()                       |
+| + Figura(String)                 |
+| + getNombre() : String           |
+| + calcularArea() : double        |
+| + toString() : String            |
++----------------------------------+
+                 ▲
+                 | hereda
+                 |
++----------------------------------+
+|              Circulo              |
++----------------------------------+
+| - radio : double                 |
++----------------------------------+
+| + Circulo()                      |
+| + Circulo(double)                |
+| + getRadio() : double            |
+| + calcularArea() : double        |
+| + toString() : String            |
++----------------------------------+
+                 ▲
+                 | crea y muestra
+                 |
++----------------------------------+
+|               Main               |
++----------------------------------+
+| + main(String[]) : void          |
++----------------------------------+
+
+Comportamiento esperado:
+1. Solicitar al usuario el radio del círculo.
+2. Crear un objeto Circulo con el valor capturado.
+3. Calcular el área usando la fórmula A = πr².
+4. Mostrar el nombre de la figura, el radio y el área con dos decimales.
+5. Si los datos ingresados no son válidos, mostrar un mensaje de error y no presentar un área inválida.
+
+RESTRICCIONES
+- Todo debe ejecutarse por consola, sin package; utilizar Scanner de java.util.
+- Los atributos deben ser private y consultarse mediante métodos públicos cuando corresponda.
+- Figura debe ser la clase base y Circulo debe extender Figura.
+- Incluir constructores sobrecargados en Figura y Circulo; usar this(...) para reutilizar la inicialización y super(...) para inicializar la clase base.
+- Implementar calcularArea() y sobrescribir toString() en Circulo; reutilizar super.toString() para presentar la información heredada.
+- El nombre de la figura no puede ser nulo ni quedar vacío.
+- El radio debe ser mayor que cero y finito; no aceptar cero, negativos, NaN ni infinito.
+- Si se escribe texto donde se espera un número, mostrar un mensaje que indique que se requiere un valor numérico. Si el radio no cumple las reglas, mostrar el motivo del error y terminar sin mostrar un resultado inválido.
+- Usar Java estándar; no utilizar librerías externas.
+- No usar comentarios ni Javadoc en el código.
+
+CRITERIOS DE ÉXITO
+El programa debe compilar y ejecutarse sin errores en IntelliJ IDEA.
+
+Prueba sugerida:
+1. Ingresar radio 2: debe mostrar un área aproximada de 12.57.
+2. Ingresar radio 0: debe mostrar un mensaje de error y no calcular un área válida.
+3. Ingresar radio -2: debe mostrar un mensaje de error por valor no permitido.
+4. Ingresar hola: debe indicar que el dato debe ser numérico.
+5. Verificar que el resultado muestre la figura, el radio y el área con dos decimales.
+
+FORMATO DE RESPUESTA
+Entregar tres archivos .java separados: Figura.java, Circulo.java y Main.java. No usar package. El código debe estar completo y listo para ejecutarse en IntelliJ IDEA. Al final, explicar brevemente dónde se usan la herencia, los constructores sobrecargados, this(...), super(...), @Override y el cálculo del área.
