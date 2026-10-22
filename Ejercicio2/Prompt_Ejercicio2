@@ -1,0 +1,71 @@
+CONTEXTO:
+Se utiliza Java 21 en IntelliJ IDEA, sin paquetes adicionales y sin declarar package. Es la Práctica 8 de MPOO (Herencia, 2da parte), Facultad de Ingeniería, UNAM. Para la estructura, toma como referencia la Guía práctica de estudio 08, el Manual MADO-21 y el ejemplo Cloud Lab de clase: atributos privados, constructores sobrecargados, encadenamiento con this(...), llamada al padre con super(...), mensajes de inicialización y toString() sobrescrito con super.toString(). El programa se ejecuta desde Main y muestra objetos en consola.
+
+OBJETIVO:
+Implementar una jerarquía de figuras geométricas. Figura será la clase base y Triangulo, Cuadrado, Rectangulo, Circulo y Pentagono serán subclases. Cada figura tendrá atributos propios y calculará su área con su fórmula. Los constructores de cada subclase deben utilizar this(...) para encadenar las variantes y super(nombre) para inicializar la parte heredada, siguiendo el estilo de Cloud Lab.
+
+CODIGO
+Diagrama de clases:
+
+                         +---------------------------+
+                         |           Figura          |
+                         +---------------------------+
+                         | - nombre : String         |
+                         +---------------------------+
+                         | + Figura()                |
+                         | + Figura(String)          |
+                         | + calcularArea(): double  |
+                         | + toString(): String      |
+                         +---------------------------+
+             _____________|______________|______________|______________|____________
+            /             /              |              |              +----------------+ +----------------+ +----------------+ +----------------+ +----------------+
+|   Triangulo    | |    Cuadrado    | |   Rectangulo   | |    Circulo     | |   Pentagono    |
++----------------+ +----------------+ +----------------+ +----------------+ +----------------+
+| - base: double | | - lado: double | | - base: double | | - radio:double | | - lado: double |
+| - altura:double| |                | | - altura:double| |                | | - apotema:double|
++----------------+ +----------------+ +----------------+ +----------------+ +----------------+
+| + constructores| | + constructores| | + constructores| | + constructores| | + constructores|
+| + calcularArea()| | + calcularArea()| | + calcularArea()| | + calcularArea()| | + calcularArea()|
+| + toString()   | | + toString()   | | + toString()   | | + toString()   | | + toString()   |
++----------------+ +----------------+ +----------------+ +----------------+ +----------------+
+                                 ^
+                                 | crea y recorre objetos
+                         +---------------------------+
+                         |            Main           |
+                         +---------------------------+
+                         | + main(String[]) : void   |
+                         +---------------------------+
+
+Requisitos por clase:
+1. Figura: atributo nombre private; constructor sin parámetros que encadene con this("Figura sin nombre"); constructor con nombre que inicialice el atributo y muestre un mensaje; método calcularArea() con valor inicial 0.0; toString() que devuelva el nombre.
+2. Cada subclase debe tener atributos privados y tres constructores: uno vacío, uno con las dimensiones y uno completo con nombre y dimensiones. Los constructores deben encadenarse con this(...) y el constructor completo debe llamar a super(nombre) e imprimir un mensaje propio.
+3. Triangulo: base y altura; área = base * altura / 2.
+4. Cuadrado: lado; área = lado * lado.
+5. Rectangulo: base y altura; área = base * altura.
+6. Circulo: radio; área = PI * radio * radio.
+7. Pentagono regular: lado y apotema; área = (5 * lado * apotema) / 2.
+8. Todas las subclases deben sobrescribir calcularArea() y toString(). toString() debe reutilizar super.toString() y agregar dimensiones y área.
+9. Main debe crear varias instancias con constructores diferentes, guardarlas en un arreglo Figura[] y recorrerlo con for-each para imprimirlas.
+
+RESTRICCIONES
+- Entregar Figura.java, Triangulo.java, Cuadrado.java, Rectangulo.java, Circulo.java, Pentagono.java y Main.java.
+- No utilizar package, Scanner, menús ni bibliotecas adicionales.
+- Todos los atributos deben ser private.
+- Utilizar this(...) para encadenar constructores, super(...) para inicializar la clase base y @Override para sobrescribir los métodos.
+- Las llamadas this(...) y super(...) deben ser la primera instrucción del constructor correspondiente.
+- No usar clases abstractas, interfaces, streams, lambdas, records ni temas posteriores a los vistos en clase.
+- No incluir comentarios ni Javadoc.
+
+CRITERIOS DE ÉXITO
+El proyecto debe compilar y ejecutarse en IntelliJ IDEA. Los mensajes de inicialización deben mostrar que Figura se construye antes que cada subclase. La consola debe imprimir dimensiones y áreas con dos decimales.
+
+Prueba sugerida:
+- Triangulo con base 4 y altura 3: área 6.00.
+- Cuadrado con lado 2: área 4.00.
+- Rectangulo con base 4 y altura 3: área 12.00.
+- Circulo con radio 2: área aproximada 12.57.
+- Pentagono con lado 2 y apotema 1.4: área 7.00.
+- También debe aparecer un objeto creado con constructor vacío para demostrar el encadenamiento con this(...).
+
+FORMATO DE RESPUESTA
+Entregar siete archivos .java separados, sin package y listos para IntelliJ IDEA. Al final, explicar brevemente cómo se aplican this(...), super(...), la sobrecarga de constructores, @Override y el uso del arreglo Figura[].
