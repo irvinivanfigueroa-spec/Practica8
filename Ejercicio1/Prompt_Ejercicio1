@@ -1,0 +1,65 @@
+CONTEXTO:
+Se utiliza Java 21 en la IDE IntelliJ IDEA, sin paquetes adicionales y sin declarar package. Es la Práctica 8 de Modelos de Programación Orientada a Objetos (MPOO), Herencia (2da parte), de la Facultad de Ingeniería, UNAM. Toma como referencia la Guía práctica de estudio 08, el Manual MADO-21 y el ejemplo Cloud Lab visto en clase. El objetivo es practicar constructores sobrecargados, encadenamiento con this(...), llamada al constructor padre con super(...) y sobrescritura de toString(). El programa se ejecuta desde Main y muestra los mensajes de inicialización de los constructores.
+
+OBJETIVO:
+Crear la clase Figura y derivar de ella la clase Circulo. Figura debe almacenar el nombre y tener constructores sobrecargados encadenados mediante this(...). Circulo debe agregar el radio, contar con constructores propios sobrecargados, llamar a un constructor de Figura mediante super(...), calcular el área y sobrescribir toString() reutilizando super.toString(). Cada constructor completo debe imprimir un mensaje para observar el orden en que se ejecutan el padre y la clase derivada, igual que en Cloud Lab.
+
+CODIGO
+Diagrama de clases:
+
++----------------------------------+
+|              Figura              |
++----------------------------------+
+| - nombre : String                |
++----------------------------------+
+| + Figura()                       |
+| + Figura(String)                 |
+| + toString() : String            |
++----------------------------------+
+                 ^
+                 | hereda
++----------------------------------+
+|              Circulo             |
++----------------------------------+
+| - radio : double                 |
++----------------------------------+
+| + Circulo()                      |
+| + Circulo(double)                |
+| + Circulo(String, double)        |
+| + calcularArea() : double        |
+| + toString() : String            |
++----------------------------------+
+                 ^
+                 | crea e imprime objetos
++----------------------------------+
+|               Main               |
++----------------------------------+
+| + main(String[]) : void          |
++----------------------------------+
+
+Requisitos por clase:
+1. Figura: atributo nombre privado; constructor sin parámetros que llame a this("Figura sin nombre"); constructor con nombre que asigne el atributo e imprima un mensaje; sobrescribir toString().
+2. Circulo extends Figura: atributo radio privado; constructor sin parámetros que llame a this("Circulo basico", 1.0); constructor que reciba solo radio y llame a this("Circulo", radio); constructor completo que invoque super(nombre), inicialice radio e imprima un mensaje; calcularArea() = PI * radio * radio; sobrescribir toString() concatenando super.toString(), radio y área.
+3. Main: crear una Figura sin parámetros, una Figura con nombre, un Circulo sin parámetros, un Circulo con radio y un Circulo con nombre y radio. Imprimir todos los objetos con System.out.println(objeto).
+
+RESTRICCIONES
+- Utilizar únicamente las clases Figura, Circulo y Main, cada una en su archivo .java.
+- No utilizar package, Scanner, menús, ArrayList ni validaciones que no se solicitan en este ejercicio.
+- Los atributos deben ser private.
+- Utilizar this(...) para encadenar constructores de la misma clase y super(...) para llamar al constructor de la clase base. Estas llamadas deben ser la primera instrucción del constructor.
+- Usar @Override en toString() y super.toString() dentro de Circulo.
+- Mantener el nivel y la estructura del ejemplo Cloud Lab; no agregar clases abstractas, interfaces, streams, lambdas ni temas posteriores.
+- No incluir comentarios ni Javadoc en el código.
+
+CRITERIOS DE ÉXITO
+El proyecto debe compilar y ejecutarse en IntelliJ IDEA. Al crear un Circulo, primero debe aparecer el mensaje de Figura y después el mensaje de Circulo. Deben mostrarse los cinco objetos creados y el área calculada de cada círculo.
+
+Prueba sugerida:
+- Figura sin parámetros: debe mostrar "Figura sin nombre".
+- Circulo sin parámetros: radio 1.0 y área aproximada 3.14.
+- Circulo con radio 2.0: área aproximada 12.57.
+- Circulo con nombre "Circulo grande" y radio 4.0: área aproximada 50.27.
+- Verificar en la consola que el mensaje de Figura aparece antes que el mensaje de Circulo.
+
+FORMATO DE RESPUESTA
+Entregar tres archivos .java separados: Figura.java, Circulo.java y Main.java. El código debe estar completo, sin package y listo para ejecutarse en IntelliJ IDEA. Al final, explicar brevemente dónde se utilizan this(...), super(...), la sobrecarga de constructores y @Override.
