@@ -1,0 +1,87 @@
+CONTEXTO:
+Se utiliza Java 21 en la IDE IntelliJ IDEA. Es la Práctica 8 de Modelos de Programación Orientada a Objetos (MPOO), Herencia (2da parte), de la Facultad de Ingeniería, UNAM. El programa se ejecuta por consola, sin package, y utiliza Scanner y ArrayList de java.util. Se mantiene el nivel y el estilo de los ejemplos de Classroom: menú repetitivo, captura de datos por teclado, validación de entradas y procesamiento de los datos ingresados.
+
+OBJETIVO:
+Crear una clase base Figura y una clase derivada Circulo. Figura contiene el nombre y un método calcularArea(). Circulo agrega el radio, define sus propios constructores y reutiliza el constructor de Figura mediante super(...). Los constructores de Circulo se encadenan mediante this(...). Circulo sobrescribe calcularArea() y toString(), utilizando super.toString() para reutilizar la información de la clase base. El programa permite registrar círculos y mostrarlos con sus áreas; los objetos se guardan en un ArrayList<Figura>.
+
+CODIGO
+Diagrama de clases:
+
++----------------------------------+
+|              Figura              |
++----------------------------------+
+| - nombre : String                |
++----------------------------------+
+| + Figura(String)                 |
+| + getNombre() : String           |
+| + calcularArea() : double        |
+| + toString() : String            |
++----------------------------------+
+                ▲
+                | hereda
++----------------------------------+
+|              Circulo             |
++----------------------------------+
+| - radio : double                 |
++----------------------------------+
+| + Circulo()                      |
+| + Circulo(double)                |
+| + Circulo(String, double)        |
+| + getRadio() : double            |
+| + calcularArea() : double        |
+| + toString() : String            |
++----------------------------------+
+                ▲
+                | se utiliza desde
++----------------------------------+
+|               Main               |
++----------------------------------+
+| + main(String[]) : void          |
+| - mostrarMenu() : void            |
+| - leerOpcion() : int              |
+| - leerRadio() : double            |
+| - leerTexto(String) : String      |
+| - mostrarFiguras(...) : void      |
++----------------------------------+
+
+Constructores de Circulo:
+- Circulo(): utiliza this(1.0).
+- Circulo(double): utiliza this("Circulo", radio).
+- Circulo(String, double): llama a super(nombre) y asigna el radio.
+
+Menú del programa:
+1. Crear círculo por defecto, con radio 1.0.
+2. Crear círculo indicando el radio.
+3. Crear círculo indicando nombre y radio.
+4. Mostrar las figuras registradas y sus áreas.
+5. Salir.
+
+Cálculo del área:
+- Círculo: PI * radio * radio.
+
+RESTRICCIONES
+- Ejecutar el programa por consola, sin declarar package.
+- Utilizar Scanner y ArrayList de java.util.
+- Mantener los atributos como private y acceder a ellos mediante métodos públicos.
+- Aplicar herencia con extends, llamada al constructor base con super(...), encadenamiento con this(...), sobrescritura con @Override y reutilización de super.toString().
+- No utilizar clases abstractas, streams, lambdas, records ni herramientas que no correspondan al nivel visto en clase.
+- El radio debe ser numérico, finito y mayor que cero. Si se ingresa texto, un valor negativo, cero o un valor no finito, se debe mostrar el mensaje de validación correspondiente y volver a solicitar el dato.
+- El nombre no puede quedar vacío.
+- Una opción inexistente o una entrada no numérica en el menú debe mostrar "Opcion no disponible.".
+- Si se solicita mostrar figuras y la lista está vacía, debe indicarse "No hay figuras registradas.".
+- Mostrar las áreas con dos decimales.
+- No agregar funcionalidades que no se solicitan ni comentarios o Javadoc en el código.
+
+CRITERIOS DE ÉXITO
+El programa debe compilar y ejecutarse sin errores en IntelliJ IDEA. El menú debe repetirse hasta que se seleccione la opción 5.
+
+Pruebas sugeridas:
+1. Elegir la opción 2 e ingresar -3: el valor debe rechazarse. Después ingresar 0: debe rechazarse. Ingresar 2: el círculo debe registrarse y su área debe ser 12.57.
+2. Elegir la opción 3, ingresar el nombre Moneda y radio 1.5: el círculo debe registrarse y su área debe ser 7.07.
+3. Elegir la opción 1: se debe registrar un círculo con radio 1.0 y área 3.14.
+4. Elegir la opción 4: deben mostrarse los círculos registrados con sus datos y área.
+5. Elegir la opción 4 antes de registrar círculos: debe mostrarse "No hay figuras registradas.".
+6. Ingresar una opción inexistente o texto en el menú: debe mostrarse "Opcion no disponible.". Elegir la opción 5 debe finalizar el programa.
+
+FORMATO DE RESPUESTA
+Entregar tres archivos .java separados: Figura.java, Circulo.java y Main.java. No utilizar package. El código debe estar completo y listo para ejecutarse en IntelliJ IDEA. Incluir una explicación breve de dónde se utilizan extends, super(...), this(...), @Override y la sobrecarga de constructores.
