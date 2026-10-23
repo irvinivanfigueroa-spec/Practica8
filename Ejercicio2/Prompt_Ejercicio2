@@ -1,0 +1,89 @@
+CONTEXTO:
+Se utiliza Java 21 en la IDE IntelliJ IDEA. Es la Práctica 8 de Modelos de Programación Orientada a Objetos (MPOO), Herencia (2da parte), de la Facultad de Ingeniería, UNAM. El programa se ejecuta por consola, sin package, y utiliza Scanner y ArrayList de java.util. Se mantiene el nivel y el estilo de los ejemplos de Classroom: menú repetitivo, captura de datos por teclado, validación de entradas y procesamiento de los datos ingresados.
+
+OBJETIVO:
+Diseñar una jerarquía de figuras geométricas. Figura será la clase base y Triangulo, Cuadrado, Rectangulo, Circulo y Pentagono serán sus clases derivadas. Cada subclase tendrá sus atributos propios, llamará al constructor de Figura mediante super(...), sobrescribirá calcularArea() con su fórmula y sobrescribirá toString() reutilizando super.toString(). El programa permitirá registrar las figuras, mostrar sus datos y áreas, y calcular el área total. Los objetos se guardarán en un ArrayList<Figura> para trabajar con una referencia común de la clase base.
+
+CODIGO
+Diagrama de clases:
+
++----------------------------------+
+|              Figura              |
++----------------------------------+
+| - nombre : String                |
++----------------------------------+
+| + Figura(String)                 |
+| + getNombre() : String           |
+| + calcularArea() : double        |
+| + toString() : String            |
++----------------------------------+
+       ▲          ▲          ▲          ▲          ▲
+       |          |          |          |          |
++------------+ +----------+ +------------+ +---------+ +------------+
+| Triangulo  | | Cuadrado | | Rectangulo | | Circulo | | Pentagono  |
++------------+ +----------+ +------------+ +---------+ +------------+
+| - base     | | - lado   | | - base     | | - radio | | - lado     |
+| - altura   | |          | | - altura   | |         | |            |
++------------+ +----------+ +------------+ +---------+ +------------+
+| calcularArea() y toString() sobrescritos en cada subclase            |
++---------------------------------------------------------------------+
+                              ▲
+                              | ArrayList<Figura>
++----------------------------------+
+|               Main               |
++----------------------------------+
+| + main(String[]) : void          |
+| - mostrarMenu() : void            |
+| - leerOpcion() : int              |
+| - leerMedida(String) : double     |
+| - registrarFigura(...) : void     |
+| - mostrarFiguras(...) : void      |
+| - mostrarAreaTotal(...) : void    |
++----------------------------------+
+
+Fórmulas de área:
+- Triángulo: base * altura / 2.
+- Cuadrado: lado * lado.
+- Rectángulo: base * altura.
+- Círculo: PI * radio * radio.
+- Pentágono regular: 5 * lado * lado / (4 * tan(PI / 5)).
+
+Menú del programa:
+1. Registrar triángulo.
+2. Registrar cuadrado.
+3. Registrar rectángulo.
+4. Registrar círculo.
+5. Registrar pentágono.
+6. Mostrar figuras y sus áreas.
+7. Mostrar área total.
+8. Salir.
+
+RESTRICCIONES
+- Ejecutar el programa por consola, sin declarar package.
+- Utilizar Scanner y ArrayList de java.util.
+- Mantener los atributos como private y acceder a ellos mediante métodos públicos.
+- Aplicar extends, super(...), @Override y super.toString() donde corresponda. Utilizar ArrayList<Figura> para guardar las diferentes figuras.
+- La clase Figura no debe declararse abstracta; su método calcularArea() devuelve 0.0 y las subclases proporcionan su propio cálculo.
+- No utilizar streams, lambdas, records ni herramientas que no correspondan al nivel visto en clase.
+- Las medidas deben ser numéricas, finitas y mayores que cero. Si se ingresa texto, un valor negativo, cero o un valor no finito, se debe mostrar el mensaje de validación correspondiente y volver a solicitar el dato.
+- Una opción inexistente o una entrada no numérica en el menú debe mostrar "Opcion no disponible.".
+- Si se intenta mostrar las figuras o calcular el área total sin registros, debe indicarse "No hay figuras registradas.".
+- Mostrar las áreas con dos decimales.
+- No agregar funcionalidades que no se solicitan ni comentarios o Javadoc en el código.
+
+CRITERIOS DE ÉXITO
+El programa debe compilar y ejecutarse sin errores en IntelliJ IDEA. El menú debe repetirse hasta que se seleccione la opción 8.
+
+Pruebas sugeridas:
+1. Registrar un triángulo con base 4 y altura 2.5. El área esperada es 5.00.
+2. Registrar un cuadrado con lado 3. El área esperada es 9.00.
+3. Registrar un rectángulo con base 2.5 y altura 4. El área esperada es 10.00.
+4. Registrar un círculo con radio 2. El área esperada es 12.57.
+5. Registrar un pentágono regular con lado 4. El área esperada es aproximadamente 27.53.
+6. Mostrar las figuras: deben aparecer todas las figuras registradas con sus datos y sus áreas.
+7. Mostrar el área total: con las medidas anteriores, el resultado esperado es 64.09.
+8. Intentar registrar una medida con texto, negativa o igual a cero: el dato debe rechazarse y solicitarse nuevamente.
+9. Elegir las opciones 6 o 7 sin haber registrado figuras: debe mostrarse "No hay figuras registradas.". Una opción inexistente debe mostrar "Opcion no disponible." y la opción 8 debe finalizar el programa.
+
+FORMATO DE RESPUESTA
+Entregar siete archivos .java separados: Figura.java, Triangulo.java, Cuadrado.java, Rectangulo.java, Circulo.java, Pentagono.java y Main.java. No utilizar package. El código debe estar completo y listo para ejecutarse en IntelliJ IDEA. Incluir una explicación breve de extends, super(...), @Override y el uso de la referencia Figura para procesar distintos tipos de figuras.
