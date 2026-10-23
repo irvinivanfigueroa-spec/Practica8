@@ -1,0 +1,91 @@
+CONTEXTO:
+Se utiliza Java 21 en la IDE IntelliJ IDEA. Es la Práctica 8 de Modelos de Programación Orientada a Objetos (MPOO), Herencia (2da parte), de la Facultad de Ingeniería, UNAM. El programa se ejecuta por consola, sin package, y utiliza Scanner y ArrayList de java.util. Se mantiene el nivel y el estilo de los ejemplos de Classroom: menú repetitivo, captura de datos por teclado, validación de entradas y procesamiento de los datos ingresados.
+
+OBJETIVO:
+Modelar los personajes de un videojuego mediante una jerarquía de clases. Personaje será la clase base con nombre, vida y ataque. Mago, Guerrero, Villano y Aldeano serán subclases que agregan atributos propios. Sus constructores reutilizarán el constructor de Personaje mediante super(...) y, cuando corresponda, encadenarán constructores con this(...). Las subclases sobrescribirán toString() usando super.toString(). Mago, Villano y Aldeano sobrescribirán calcularDano(); Guerrero utilizará el cálculo heredado. El programa permitirá registrar personajes y mostrarlos con sus datos y daño, guardándolos en un ArrayList<Personaje>.
+
+CODIGO
+Diagrama de clases:
+
++----------------------------------+
+|             Personaje            |
++----------------------------------+
+| - nombre : String                |
+| - vida : int                     |
+| - ataque : int                   |
++----------------------------------+
+| + Personaje(String, int, int)     |
+| + getNombre() : String            |
+| + getVida() : int                 |
+| + getAtaque() : int               |
+| + calcularDano() : int            |
+| + toString() : String             |
++----------------------------------+
+       ▲             ▲             ▲             ▲
+       |             |             |             |
++------------+ +------------+ +------------+ +------------+
+|    Mago    | |  Guerrero  | |  Villano   | |  Aldeano   |
++------------+ +------------+ +------------+ +------------+
+| - mana     | | - armadura | | - amenaza  | | - oro      |
++------------+ +------------+ +------------+ +------------+
+| calcularDano sobrescrito en Mago, Villano y Aldeano; Guerrero lo hereda |
++-------------------------------------------------------------------------+
+                              ▲
+                              | ArrayList<Personaje>
++----------------------------------+
+|               Main               |
++----------------------------------+
+| + main(String[]) : void          |
+| - mostrarMenu() : void            |
+| - leerOpcion() : int              |
+| - leerEntero(String) : int         |
+| - leerTexto(String) : String       |
+| - registrarMago(...) : void        |
+| - registrarGuerrero(...) : void    |
+| - registrarVillano(...) : void     |
+| - registrarAldeano(...) : void     |
+| - mostrarPersonajes(...) : void    |
++----------------------------------+
+
+Reglas de inicialización y cálculo:
+- Personaje: el daño corresponde al atributo ataque.
+- Mago: vida fija de 80; daño = ataque + mana / 10.
+- Guerrero: vida fija de 120; utiliza el daño heredado, igual a ataque.
+- Villano: daño = ataque + amenaza.
+- Aldeano: vida fija de 30, ataque igual a 0 y daño igual a 0.
+- Constructores encadenados: Mago(String) utiliza this(nombre, 10, 50); Guerrero(String) utiliza this(nombre, 15, 20); Villano(String, int, int) utiliza this(nombre, vida, ataque, 5); Aldeano(String) utiliza this(nombre, 0).
+
+Menú del programa:
+1. Registrar mago.
+2. Registrar guerrero.
+3. Registrar villano.
+4. Registrar aldeano.
+5. Mostrar personajes y su daño.
+6. Salir.
+
+RESTRICCIONES
+- Ejecutar el programa por consola, sin declarar package.
+- Utilizar Scanner y ArrayList de java.util.
+- Mantener los atributos como private y acceder a ellos mediante métodos públicos.
+- Aplicar extends, super(...), this(...), @Override y super.toString() donde corresponda.
+- No utilizar clases abstractas, streams, lambdas, records ni herramientas que no correspondan al nivel visto en clase.
+- Los atributos numéricos ingresados deben ser enteros y no negativos. Si se ingresa texto donde se espera un entero, mostrar "Dato no valido, ingrese un numero entero." y volver a solicitar el dato.
+- El nombre no puede quedar vacío.
+- Una opción inexistente o una entrada no numérica en el menú debe mostrar "Opcion no disponible.".
+- Si se intenta mostrar personajes y la lista está vacía, debe indicarse "No hay personajes registrados.".
+- No agregar funcionalidades que no se solicitan ni comentarios o Javadoc en el código.
+
+CRITERIOS DE ÉXITO
+El programa debe compilar y ejecutarse sin errores en IntelliJ IDEA. El menú debe repetirse hasta que se seleccione la opción 6.
+
+Pruebas sugeridas:
+1. Registrar un mago llamado Merlin con ataque 30 y mana 100. Debe mostrar daño 40.
+2. Registrar un guerrero llamado Conan con ataque 25 y armadura 40. Debe mostrar daño 25.
+3. Registrar un villano llamado Gorgo con vida 200, ataque 35 y amenaza 10. Debe mostrar daño 45.
+4. Registrar un aldeano llamado Juan con oro 50. Debe mostrar daño 0.
+5. Intentar introducir texto o un número negativo en un campo numérico: el dato debe rechazarse y solicitarse nuevamente.
+6. Elegir la opción 5: deben mostrarse los personajes registrados con sus datos y el daño correspondiente.
+7. Elegir la opción 5 sin haber registrado personajes: debe mostrarse "No hay personajes registrados.". Una opción inexistente debe mostrar "Opcion no disponible." y la opción 6 debe finalizar el programa.
+
+FORMATO DE RESPUESTA
+Entregar seis archivos .java separados: Personaje.java, Mago.java, Guerrero.java, Villano.java, Aldeano.java y Main.java. No utilizar package. El código debe estar completo y listo para ejecutarse en IntelliJ IDEA. Incluir una explicación breve de extends, super(...), this(...), @Override y de la diferencia entre sobrescribir calcularDano() y heredarlo.
